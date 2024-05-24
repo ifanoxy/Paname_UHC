@@ -1,4 +1,4 @@
-package ifanoxy.paname_uch;
+package ifanoxy.paname_uhc;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

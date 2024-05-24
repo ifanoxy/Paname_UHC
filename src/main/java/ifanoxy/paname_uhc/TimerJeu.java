@@ -1,4 +1,4 @@
-package ifanoxy.paname_uch;
+package ifanoxy.paname_uhc;
 
 import java.util.Timer;
 import java.util.TimerTask;

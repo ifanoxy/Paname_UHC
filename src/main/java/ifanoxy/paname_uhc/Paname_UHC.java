@@ -1,6 +1,6 @@
-package ifanoxy.paname_uch;
+package ifanoxy.paname_uhc;
 
-import ifanoxy.paname_uch.Commands.StartCommand;
+import ifanoxy.paname_uhc.Commands.StartCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Paname_UHC extends JavaPlugin {

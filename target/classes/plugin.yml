@@ -1,6 +1,6 @@
-name: Paname_UCH
+name: Paname_UHC
 version: '1.0-SNAPSHOT'
-main: ifanoxy.paname_uch.Paname_UCH
+main: ifanoxy.paname_uhc.Paname_UHC
 api-version: '1.20'
 commands:
   start:

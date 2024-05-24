@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ifanoxy</groupId>
-    <artifactId>Paname_UCH</artifactId>
+    <artifactId>Paname_UHC</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Paname_UCH</name>
+    <name>Paname_UHC</name>
 
     <properties>
         <java.version>1.8</java.version>
