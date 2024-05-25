@@ -1,6 +1,9 @@
+ifanoxy\paname_uhc\Game\ScoreboardGame.class
 ifanoxy\paname_uhc\PlayerDeath.class
+ifanoxy\paname_uhc\Game\Tab.class
 ifanoxy\paname_uhc\Game\GameMain.class
 ifanoxy\paname_uhc\Paname_UHC.class
+ifanoxy\paname_uhc\Game\WorldBorder.class
 ifanoxy\paname_uhc\TimerJeu.class
 ifanoxy\paname_uhc\TimerJeu$1.class
 ifanoxy\paname_uhc\Commands\StartCommand.class
