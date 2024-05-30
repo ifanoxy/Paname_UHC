@@ -13,6 +13,10 @@ import java.util.List;
 
 public class StartCommand implements CommandExecutor {
     String name;
+
+    public void Main() {
+
+    }
     @Override
     public boolean onCommand(@NonNull CommandSender sender,@NonNull Command command,@NonNull String label,@NonNull String[] args)
     {

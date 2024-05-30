@@ -21,25 +21,29 @@ public class GameMain {
     public HashMap<String, String> playersRoles;
 
     public void init(List<Player> players) {
+
+        System.out.println("Lancement du timer");
+        this.timer = new TimerJeu();
+        this.timer.startTimer();
+
         this.playersList = players;
         this.scoreboard = new ScoreboardGame();
+        this.scoreboard.init(this);
 
         this.server = Bukkit.getServer();
         this.sender = this.server.getConsoleSender();
 
         this.distributionsDesRoles();
 
+        server.dispatchCommand(this.sender, "mv delete UHC_GAME");
+        server.dispatchCommand(this.sender, "mvconfirm");
         server.dispatchCommand(this.sender, "mv create UHC_GAME normal");
 
-        System.out.println("Lancement du timer");
-        this.timer = new TimerJeu();
 
         for (Player p : players)
         {
             p.sendMessage("Téléportation en cours...");
-            this.server.dispatchCommand(this.sender, String.format("mv tp %s UHC_GAME", p.getName()));
-            this.server.dispatchCommand(this.sender, "mv confirm");
-
+            this.randomTeleport(p);
         }
     }
 
@@ -50,8 +54,21 @@ public class GameMain {
         for (final Player player : this.playersList) {
             String teamName = teams[new Random().nextInt(4)];
 
+            player.sendMessage(
+                    String.format("§aVous êtes dans la famille §b§l%s§a !", teamName)
+            );
+
             this.scoreboard.addToTeam(player, teamName);
             this.playersRoles.put(player.getName(), teamName);
         }
+    }
+
+    public void randomTeleport(Player player)
+    {
+
+        this.server.dispatchCommand(this.sender, String.format("mv tp %s UHC_GAME ", player.getName()));
+        this.server.dispatchCommand(this.sender, "mvconfirm");
+
+
     }
 }

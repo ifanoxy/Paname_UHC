@@ -8,6 +8,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ScoreboardGame {
 
@@ -15,7 +17,8 @@ public class ScoreboardGame {
     private Scoreboard board;
     public HashMap<String, Team> teams;
 
-    public void init() {
+    public void init(GameMain game) {
+        this.game = game;
         this.manager = Bukkit.getScoreboardManager();
         this.board = manager.getNewScoreboard();
         this.teams = new HashMap<String, Team>();
@@ -23,27 +26,24 @@ public class ScoreboardGame {
     }
 
     private void loadTeams() {
+        this.teams = new HashMap<String, Team>();
+
         Team Sydney = this.board.registerNewTeam("Sydney");
-        Sydney.setColor(ChatColor.AQUA);
-        Sydney.setPrefix("[Sydney]");
         this.teams.put("Sydney", Sydney);
 
         Team Jafar = this.board.registerNewTeam("Famille de Jafar");
-        Jafar.setColor(ChatColor.GOLD);
-        Jafar.setPrefix("[Famille de Jafar]");
-        this.teams.put("Famille de Jafar", Sydney);
+        this.teams.put("Famille de Jafar", Jafar);
 
         Team Francais = this.board.registerNewTeam("Français");
-        Francais.setColor(ChatColor.BLUE);
-        Francais.setPrefix("[Français]");
-        this.teams.put("Français", Sydney);
+        this.teams.put("Français", Francais);
 
         Team SDF = this.board.registerNewTeam("SDF");
-        SDF.setColor(ChatColor.DARK_GRAY);
-        SDF.setPrefix("[SDF]");
-        this.teams.put("SDF", Sydney);
+        this.teams.put("SDF", SDF);
 
         this.setDefaultParamTeams();
+
+        this.board.registerNewTeam("player_online");
+        this.board.registerNewTeam("timer");
     }
 
     private void setDefaultParamTeams() {

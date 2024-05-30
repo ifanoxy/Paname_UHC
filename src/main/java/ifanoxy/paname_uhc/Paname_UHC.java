@@ -25,7 +25,8 @@ public final class Paname_UHC extends JavaPlugin implements Listener {
         this.getCommand("start").setExecutor(new StartCommand());
     }
     private void loadEvents() {
-        Bukkit.getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     @EventHandler
