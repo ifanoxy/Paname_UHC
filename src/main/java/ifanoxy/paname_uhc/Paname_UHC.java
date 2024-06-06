@@ -1,6 +1,8 @@
 package ifanoxy.paname_uhc;
 
+import ifanoxy.paname_uhc.Commands.SetRole;
 import ifanoxy.paname_uhc.Commands.StartCommand;
+import ifanoxy.paname_uhc.Game.GameMain;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,11 +24,16 @@ public final class Paname_UHC extends JavaPlugin implements Listener {
     }
 
     private void loadCommands() {
-        this.getCommand("start").setExecutor(new StartCommand());
+        this.getCommand("start").setExecutor(new StartCommand(this));
+        this.getCommand("setrole").setExecutor(new SetRole());
     }
     private void loadEvents() {
-        getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    public void eventGame(GameMain gameMain) {
+        getServer().getPluginManager().registerEvents(new PlayerDeath(gameMain), this);
+        getServer().getPluginManager().registerEvents(new EntityDamage(gameMain), this);
     }
 
     @EventHandler

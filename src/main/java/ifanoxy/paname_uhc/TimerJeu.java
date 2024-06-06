@@ -8,7 +8,7 @@ public class TimerJeu {
     private static WorldBorder worldBorder;
 
     public static void setWorldBorder(WorldBorder worldBorder) {
-        //TimerJeu.worldBorder = worldBorder;
+        TimerJeu.worldBorder = worldBorder;
     }
 
     public int getSeconds() {
@@ -17,22 +17,19 @@ public class TimerJeu {
 
     public void startTimer() {
         Timer timer = new Timer();
-        System.out.println("aoefzdhiu 12");
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("aoefzdhiu 12");
                 seconds++;
                 int displayMinutes = seconds / 60;
                 int displaySeconds = seconds % 60;
-                System.out.println("Temps: " + displayMinutes + " min " + displaySeconds + " sec");
 
-                if (seconds == 20 * 60) { // 20 minutes
+                if (seconds % 10 == 0) {
                     worldBorder.executeCommand();
                 }
             }
-        }, 3000, 1000); // delay 3 seconds, period 1 second
+        }, 3000, 1000);
     }
 
 

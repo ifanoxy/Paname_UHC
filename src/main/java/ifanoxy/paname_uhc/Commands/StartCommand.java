@@ -1,6 +1,7 @@
 package ifanoxy.paname_uhc.Commands;
 
 import ifanoxy.paname_uhc.Game.GameMain;
+import ifanoxy.paname_uhc.Paname_UHC;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,9 +14,10 @@ import java.util.List;
 
 public class StartCommand implements CommandExecutor {
     String name;
+    private Paname_UHC plugin;
 
-    public void Main() {
-
+    public StartCommand(Paname_UHC panameUhc) {
+        this.plugin = panameUhc;
     }
     @Override
     public boolean onCommand(@NonNull CommandSender sender,@NonNull Command command,@NonNull String label,@NonNull String[] args)
@@ -28,7 +30,7 @@ public class StartCommand implements CommandExecutor {
             Bukkit.broadcastMessage(String.format("Lancement de l'UHC avec %d personnes !", OnlinePlayers.size()));
 
             GameMain jeu = new GameMain();
-            jeu.init(OnlinePlayers);
+            jeu.init(OnlinePlayers, this.plugin);
         }
         return false;
     }

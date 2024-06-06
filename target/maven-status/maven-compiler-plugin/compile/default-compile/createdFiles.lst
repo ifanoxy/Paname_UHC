@@ -1,7 +1,15 @@
-ifanoxy\paname_uhc\PlayerDeath.class
+ifanoxy\paname_uhc\Roles\Leo.class
+ifanoxy\paname_uhc\Game\victoryroyale.class
+ifanoxy\paname_uhc\Roles\Clotaire.class
 ifanoxy\paname_uhc\Game\GameMain.class
 ifanoxy\paname_uhc\Paname_UHC.class
 ifanoxy\paname_uhc\TimerJeu.class
 ifanoxy\paname_uhc\TimerJeu$1.class
+ifanoxy\paname_uhc\Roles\Sidney$1.class
+ifanoxy\paname_uhc\EntityDamage.class
+ifanoxy\paname_uhc\Commands\SetRole.class
+ifanoxy\paname_uhc\PlayerDeath.class
+ifanoxy\paname_uhc\Roles\Empereur_SDF.class
 ifanoxy\paname_uhc\Commands\StartCommand.class
 ifanoxy\paname_uhc\Roles\Jafar.class
+ifanoxy\paname_uhc\Roles\Leo$1.class

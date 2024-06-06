@@ -2,10 +2,9 @@ package ifanoxy.paname_uhc.Game;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -14,47 +13,53 @@ import java.util.TimerTask;
 public class ScoreboardGame {
 
     private ScoreboardManager manager;
-    private Scoreboard board;
-    public HashMap<String, Team> teams;
+    private GameMain game;
+    private Objective objective;
+
 
     public void init(GameMain game) {
         this.game = game;
         this.manager = Bukkit.getScoreboardManager();
-        this.board = manager.getNewScoreboard();
-        this.teams = new HashMap<String, Team>();
-        this.loadTeams();
+
+        for (Player player : this.game.playersList) {
+            Scoreboard board = manager.getNewScoreboard();
+            player.setScoreboard(board);
+            this.setupScoreBoard(board);
+            this.updatemainScores(board, player);
+        }
     }
 
-    private void loadTeams() {
-        this.teams = new HashMap<String, Team>();
 
-        Team Sydney = this.board.registerNewTeam("Sydney");
-        this.teams.put("Sydney", Sydney);
+    public void setupScoreBoard(Scoreboard board) {
+        this.objective = board.registerNewObjective("serveur_info", "dummy");
+        this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        this.objective.setDisplayName(ChatColor.GREEN + "Serveur Paname UHC");
 
-        Team Jafar = this.board.registerNewTeam("Famille de Jafar");
-        this.teams.put("Famille de Jafar", Jafar);
-
-        Team Francais = this.board.registerNewTeam("Français");
-        this.teams.put("Français", Francais);
-
-        Team SDF = this.board.registerNewTeam("SDF");
-        this.teams.put("SDF", SDF);
-
-        this.setDefaultParamTeams();
-
-        this.board.registerNewTeam("player_online");
-        this.board.registerNewTeam("timer");
     }
+    public void updatemainScores(Scoreboard board, Player player) {
 
-    private void setDefaultParamTeams() {
-        this.teams.forEach((name, team) -> {
-            team.setAllowFriendlyFire(false);
-        });
-    }
+        for (String str : board.getEntries()) {
+            board.resetScores(str);
+        }
+        Location location = player.getLocation();
 
-    public boolean addToTeam(Player player, String team) {
-        Team teamAdded = this.teams.get(team);
-        teamAdded.addEntry(player.getName());
-        return true;
+        this.objective.getScore(String.format("     ")).setScore(12);
+        this.objective.getScore(String.format(" > Nombre de Joueur %s", game.playersList.size())).setScore(11);
+        this.objective.getScore(String.format("    ")).setScore(10);
+        this.objective.getScore(String.format(" > World Border: %s x %s", Math.round((float) this.game.wb.size /2), Math.round((float) this.game.wb.size /2))).setScore(9);
+        this.objective.getScore(String.format("   ")).setScore(8);
+        this.objective.getScore(String.format(" > Kill: %s", game.kills.get(player.getName()))).setScore(7);
+        this.objective.getScore(String.format("  ")).setScore(6);
+        this.objective.getScore(String.format(" > x: %s y: %s z: %s", (int)location.getX(), (int)location.getY(), (int)location.getZ())).setScore(5);
+        this.objective.getScore(String.format(" ")).setScore(4);
+        this.objective.getScore(String.format(" > Timer %s", game.timer.toString())).setScore(3);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updatemainScores(board, player);
+            }
+        }, 80);
     }
 }

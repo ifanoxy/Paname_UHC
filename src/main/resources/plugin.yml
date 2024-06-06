@@ -6,3 +6,6 @@ commands:
   start:
     description: Permet de lancer l'UHC
     usage: /<command>
+  setrole:
+    description: coucou lol
+    usage: /<command> <player/role> <?role>

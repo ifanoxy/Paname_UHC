@@ -5,10 +5,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class WorldBorder extends JavaPlugin {
+public class WorldBorder {
 
-    @Override
-    public void onEnable(){
+    public int size;
+
+    public void init(){
+        this.size = 2000;
         CommandSender sender = Bukkit.getConsoleSender();
         Bukkit.dispatchCommand(sender, "worldborder set 2000");
         TimerJeu.setWorldBorder(this);
@@ -17,5 +19,6 @@ public class WorldBorder extends JavaPlugin {
     public void executeCommand() {
         CommandSender sender = Bukkit.getConsoleSender();
         Bukkit.dispatchCommand(sender, "worldborder add -3 10");
+        this.size -= 3;
     }
 }
