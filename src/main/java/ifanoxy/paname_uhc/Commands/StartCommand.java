@@ -30,7 +30,11 @@ public class StartCommand implements CommandExecutor {
             Bukkit.broadcastMessage(String.format("Lancement de l'UHC avec %d personnes !", OnlinePlayers.size()));
 
             GameMain jeu = new GameMain();
-            jeu.init(OnlinePlayers, this.plugin);
+            try {
+                jeu.init(OnlinePlayers, this.plugin);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         return false;
     }

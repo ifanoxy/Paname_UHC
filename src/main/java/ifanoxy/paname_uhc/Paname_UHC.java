@@ -1,9 +1,8 @@
 package ifanoxy.paname_uhc;
 
-import ifanoxy.paname_uhc.Commands.SetRole;
 import ifanoxy.paname_uhc.Commands.StartCommand;
 import ifanoxy.paname_uhc.Game.GameMain;
-import org.bukkit.Bukkit;
+import ifanoxy.paname_uhc.Others.DayCycleTask;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
@@ -14,6 +13,7 @@ public final class Paname_UHC extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         System.out.println("[Paname UHC] Lancement des commandes");
+        new DayCycleTask().runTaskTimer(this, 0L, 1L);
         this.loadCommands();
         this.loadEvents();
     }
@@ -25,7 +25,6 @@ public final class Paname_UHC extends JavaPlugin implements Listener {
 
     private void loadCommands() {
         this.getCommand("start").setExecutor(new StartCommand(this));
-        this.getCommand("setrole").setExecutor(new SetRole());
     }
     private void loadEvents() {
         getServer().getPluginManager().registerEvents(this, this);
@@ -34,6 +33,9 @@ public final class Paname_UHC extends JavaPlugin implements Listener {
     public void eventGame(GameMain gameMain) {
         getServer().getPluginManager().registerEvents(new PlayerDeath(gameMain), this);
         getServer().getPluginManager().registerEvents(new EntityDamage(gameMain), this);
+        getServer().getPluginManager().registerEvents(new Chat(gameMain), this);
+        getServer().getPluginManager().registerEvents(new Mange(gameMain), this);
+        getServer().getPluginManager().registerEvents(new Crafting(gameMain), this);
     }
 
     @EventHandler
